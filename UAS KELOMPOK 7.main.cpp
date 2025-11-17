@@ -147,7 +147,7 @@ int main() {
         }
 
         else {
-            cout << "Pilihan tidak valid!\n";
+            cout << "Pilihan tidak valid!!\n";
         }
     }
 
