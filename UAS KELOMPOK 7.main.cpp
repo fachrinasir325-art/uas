@@ -1,5 +1,31 @@
 #include <iostream>
+#include <thread>
+#include <chrono>
+#include <vector>
+#include <string>
 using namespace std;
+
+void print_lirik(){
+    vector<pair<string,double>>
+	baris= {
+        {"Selamat datang diprogram konversi mata uang :)", 0.09},
+        {"apakah anda ingin menukar uang?", 0.09},
+        {"jika iya ketik 1",0.09}
+	};
+    vector<double> jeda = {0.1, 0.1};
+
+        for (size_t i=0; i<baris.size(); ++i){
+        for (char c : baris[i].first){
+            cout<<c;
+            cout.flush();
+            this_thread::sleep_for(chrono::duration<double>(baris[i].second)); //buat jeda pake detik
+        }
+        cout<<endl;
+        if (i<jeda.size()){
+            this_thread::sleep_for(chrono::duration<double>(jeda[i]));
+        }
+    }
+}
 
 const int MAX_RIWAYAT = 200;
 
@@ -12,7 +38,7 @@ void tampilkanMenu() {
     cout << "5. WON (Won Korea)\n";
     cout << "0. Kembali\n";
     cout << "Pilihan: ";
-}
+};
 
 double konversiDariRupiah(double rupiah, double kurs) {
     return rupiah / kurs;
@@ -40,9 +66,14 @@ void tampilkanRiwayat(string riwayat[], int jumlah) {
 
 
 int main() {
+    print_lirik();
+    int Ketik;
+    cin >> Ketik;
 
-    string nama[5] = {"USD", "EUR", "JPY", "MYR", "WON"};
-    double kurs[5] = {16712, 19421, 108, 4044, 11.53};
+    if (Ketik == 1){
+
+        string nama[5] = {"USD", "EUR", "JPY", "MYR", "WON"};
+        double kurs[5] = {16712, 19421, 108, 4044, 11.53};
 
     string riwayat[MAX_RIWAYAT];
     int jumlahRiwayat = 0;
@@ -87,7 +118,7 @@ int main() {
 
             riwayat[jumlahRiwayat++] =
                 "Rupiah " + to_string(jumlah) +
-                " → " + nama[tujuan - 1] + " " + to_string(hasil);
+                " ke " + nama[tujuan - 1] + " " + to_string(hasil);
         }
 
 
@@ -110,7 +141,7 @@ int main() {
 
             riwayat[jumlahRiwayat++] =
                 nama[asal - 1] + string(" ") + to_string(jumlah) +
-                " → Rupiah " + to_string(hasil);
+                " ke Rupiah " + to_string(hasil);
         }
 
 
@@ -122,6 +153,10 @@ int main() {
             cout << "\n--- Pilih Mata Uang Tujuan ---";
             tampilkanMenu();
             cin >> tujuan;
+
+            if (asal == tujuan){
+                cout << "mata uang sama silakan coba lagi:)";}
+                continue;
 
             if (asal == 0 || tujuan == 0) continue;
             if (asal < 1 || asal > 5 || tujuan < 1 || tujuan > 5) {
@@ -150,6 +185,6 @@ int main() {
             cout << "Pilihan tidak valid!\n";
         }
     }
-
+    }
     return 0;
 }
