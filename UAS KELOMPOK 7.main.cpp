@@ -10,7 +10,8 @@ void print_lirik(){
 	baris= {
         {"Selamat datang diprogram konversi mata uang :)", 0.09},
         {"apakah anda ingin menukar uang?", 0.09},
-        {"jika iya ketik 1",0.09}
+        {"jika iya ketik 1",0.09},
+        {"jika tidak ketik 0",0.09},
 	};
     vector<double> jeda = {0.1, 0.1};
 
@@ -70,10 +71,11 @@ int main() {
     int Ketik;
     cin >> Ketik;
 
-    if (Ketik == 1){
+if (Ketik == 1){
 
         string nama[5] = {"USD", "EUR", "JPY", "MYR", "WON"};
         double kurs[5] = {16712, 19421, 108, 4044, 11.53};
+
 
     string riwayat[MAX_RIWAYAT];
     int jumlahRiwayat = 0;
@@ -185,6 +187,10 @@ int main() {
             cout << "Pilihan tidak valid!\n";
         }
     }
+}
+    if (Ketik == 0){
+    cout << "Terima Kasih :)";
     }
-    return 0;
+
+return 0;
 }
